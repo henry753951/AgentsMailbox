@@ -5,7 +5,8 @@ struct MessageListView: View {
 
   var body: some View {
     ZStack {
-      MailboxBackground()
+      Color(nsColor: .controlBackgroundColor)
+        .ignoresSafeArea()
 
       if model.connectionState == .needsCredential {
         ConnectionRequiredView()
@@ -55,22 +56,15 @@ struct MessageListView: View {
 
 private struct ConnectionRequiredView: View {
   var body: some View {
-    VStack(spacing: 16) {
-      MailboxMark(size: 60)
-      Text("Connect your mailbox")
-        .font(.title3.weight(.semibold))
-      Text("Add the API URL and token in Settings. The token is stored in your Mac’s Keychain.")
-        .foregroundStyle(.secondary)
-        .multilineTextAlignment(.center)
-        .frame(maxWidth: 280)
+    ContentUnavailableView {
+      Label("Connect your mailbox", systemImage: "tray")
+    } description: {
+      Text("Add the API URL and token in Settings.")
+    } actions: {
       SettingsLink {
         Text("Open Settings")
       }
-      .mailboxGlassButton(prominent: true)
     }
-    .padding(30)
-    .mailboxGlassCard(tint: MailboxPalette.blue.opacity(0.04), radius: 24)
-    .padding(24)
   }
 }
 
@@ -79,20 +73,11 @@ struct MessageRow: View {
 
   var body: some View {
     HStack(alignment: .top, spacing: 12) {
-      ZStack {
-        Circle()
-          .fill(
-            LinearGradient(
-              colors: [MailboxPalette.blue.opacity(0.9), MailboxPalette.violet.opacity(0.9)],
-              startPoint: .topLeading,
-              endPoint: .bottomTrailing
-            )
-          )
-        Text(message.senderInitials)
-          .font(.caption.weight(.bold))
-          .foregroundStyle(.white)
-      }
-      .frame(width: 36, height: 36)
+      Image(systemName: "person.crop.circle.fill")
+        .font(.system(size: 34, weight: .regular))
+        .symbolRenderingMode(.hierarchical)
+        .foregroundStyle(.secondary)
+        .frame(width: 36, height: 36)
 
       VStack(alignment: .leading, spacing: 4) {
         HStack(alignment: .firstTextBaseline) {

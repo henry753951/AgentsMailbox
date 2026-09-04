@@ -5,7 +5,8 @@ struct MessageDetailView: View {
 
   var body: some View {
     ZStack {
-      MailboxBackground()
+      Color(nsColor: .windowBackgroundColor)
+        .ignoresSafeArea()
 
       if model.isLoadingDetail {
         ProgressView("Loading message…")
@@ -38,7 +39,14 @@ struct MessageDetailView: View {
 
   private func messageHeader(_ detail: MailboxMessageDetail) -> some View {
     HStack(alignment: .top, spacing: 16) {
-      MailboxMark(size: 52)
+      ZStack {
+        RoundedRectangle(cornerRadius: 14, style: .continuous)
+          .fill(.quaternary)
+        Image(systemName: "envelope")
+          .font(.title2.weight(.medium))
+          .foregroundStyle(.secondary)
+      }
+      .frame(width: 52, height: 52)
       VStack(alignment: .leading, spacing: 7) {
         Text(detail.subject)
           .font(.title2.weight(.semibold))
@@ -124,7 +132,7 @@ struct MessageDetailView: View {
       }
     }
     .padding(22)
-    .mailboxGlassCard(tint: Color.white.opacity(0.015), radius: 20)
+    .mailboxGlassCard(radius: 20)
   }
 }
 

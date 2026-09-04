@@ -5,16 +5,24 @@ struct MailboxSidebar: View {
 
   var body: some View {
     VStack(spacing: 0) {
-      List {
-        Section {
-          sidebarRow(scope: .inbox, title: "Inbox", symbol: "tray.full", count: model.inboxTotal)
-          sidebarRow(scope: .attachments, title: "Attachments", symbol: "paperclip", count: nil)
+      List(selection: $model.scope) {
+        Section("Mailboxes") {
+          Label("Inbox", systemImage: "tray")
+            .badge(model.inboxTotal ?? 0)
+            .tag(MailboxScope.inbox)
+
+          Label("Attachments", systemImage: "paperclip")
+            .tag(MailboxScope.attachments)
         }
       }
       .listStyle(.sidebar)
+      .onChange(of: model.scope) {
+        Task { await model.refresh() }
+      }
 
-      VStack(alignment: .leading, spacing: 10) {
-        Divider()
+      Divider()
+
+      VStack(alignment: .leading, spacing: 9) {
         SettingsLink {
           Label("Settings", systemImage: "gearshape")
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -31,31 +39,10 @@ struct MailboxSidebar: View {
             .foregroundStyle(.secondary)
         }
       }
-      .padding(.horizontal, 14)
-      .padding(.bottom, 12)
+      .padding(.horizontal, 13)
+      .padding(.vertical, 11)
     }
     .navigationTitle("Agents Mailbox")
-  }
-
-  private func sidebarRow(
-    scope: MailboxScope, title: LocalizedStringKey, symbol: String, count: Int?
-  ) -> some View {
-    Button {
-      guard model.scope != scope else { return }
-      model.scope = scope
-      Task { await model.refresh() }
-    } label: {
-      HStack {
-        Label(title, systemImage: symbol)
-        Spacer()
-        if let count {
-          Text(count, format: .number)
-            .font(.caption.monospacedDigit())
-            .foregroundStyle(.secondary)
-        }
-      }
-    }
-    .listRowBackground(model.scope == scope ? Color.accentColor.opacity(0.16) : Color.clear)
   }
 
   private var statusText: LocalizedStringKey {

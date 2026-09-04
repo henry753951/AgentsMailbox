@@ -18,19 +18,28 @@ struct ContentView: View {
     .navigationSplitViewStyle(.balanced)
     .searchable(text: $model.searchText, placement: .toolbar, prompt: Text("Search mail"))
     .toolbar {
-      ToolbarItemGroup(placement: .primaryAction) {
-        Button {
-          Task { await model.refresh() }
-        } label: {
-          Label("Refresh", systemImage: "arrow.clockwise")
+      if #available(macOS 26.0, *) {
+        ToolbarItem(placement: .primaryAction) {
+          refreshButton
+            .buttonStyle(.glass)
         }
-        .disabled(model.isLoading)
-        .modifier(CircularToolbarButtonStyle())
+        .sharedBackgroundVisibility(.hidden)
 
-        SettingsLink {
-          Label("Settings", systemImage: "gearshape")
+        ToolbarSpacer(.fixed, placement: .primaryAction)
+
+        ToolbarItem(placement: .primaryAction) {
+          settingsButton
+            .buttonStyle(.glass)
         }
-        .modifier(CircularToolbarButtonStyle())
+        .sharedBackgroundVisibility(.hidden)
+      } else {
+        ToolbarItem(placement: .primaryAction) {
+          refreshButton
+        }
+
+        ToolbarItem(placement: .primaryAction) {
+          settingsButton
+        }
       }
     }
     .task { await model.start() }
@@ -53,5 +62,22 @@ struct ContentView: View {
     } message: {
       Text(model.errorMessage ?? "")
     }
+  }
+
+  private var refreshButton: some View {
+    Button {
+      Task { await model.refresh() }
+    } label: {
+      Label("Refresh", systemImage: "arrow.clockwise")
+    }
+    .disabled(model.isLoading)
+    .help("Refresh")
+  }
+
+  private var settingsButton: some View {
+    SettingsLink {
+      Label("Settings", systemImage: "gearshape")
+    }
+    .help("Settings")
   }
 }

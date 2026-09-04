@@ -20,19 +20,15 @@ final class MailboxViewModel {
   var settingsPresented = false
 
   private let api: MailboxAPI
-  private let keychain: KeychainStore
   private var nextCursor: String?
-  private var token: String?
   private var listGeneration = 0
 
   init(
     settings: AppSettings = AppSettings(),
-    api: MailboxAPI = MailboxAPI(),
-    keychain: KeychainStore = KeychainStore()
+    api: MailboxAPI = MailboxAPI()
   ) {
     self.settings = settings
     self.api = api
-    self.keychain = keychain
   }
 
   var hasMore: Bool { nextCursor != nil }
@@ -54,7 +50,6 @@ final class MailboxViewModel {
 
     do {
       let credentials = try credentials()
-      token = credentials.token
       let page = try await api.listMessages(
         baseURL: credentials.baseURL,
         token: credentials.token,
@@ -79,7 +74,6 @@ final class MailboxViewModel {
       }
     } catch MailboxViewModelError.missingCredential {
       guard generation == listGeneration else { return }
-      token = nil
       messages = []
       selectedID = nil
       selectedDetail = nil
@@ -126,39 +120,31 @@ final class MailboxViewModel {
     }
   }
 
-  func saveConnection(baseURLString: String, account: String, newToken: String) async throws {
+  func saveConnection(baseURLString: String, newToken: String) async throws {
     _ = try settings.validatedBaseURL(from: baseURLString)
-    let trimmedAccount = account.trimmingCharacters(in: .whitespacesAndNewlines)
-    guard !trimmedAccount.isEmpty else { throw MailboxConfigurationError.emptyAccount }
-
-    let previousAccount = settings.keychainAccount
-    if !newToken.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-      try keychain.saveToken(newToken, account: trimmedAccount)
-    } else if trimmedAccount != previousAccount,
-      try keychain.readToken(account: trimmedAccount) == nil
-    {
+    let proposedToken = newToken.trimmingCharacters(in: .whitespacesAndNewlines)
+    if proposedToken.isEmpty, settings.token.isEmpty {
       throw MailboxViewModelError.missingCredential
     }
 
     settings.baseURLString = baseURLString.trimmingCharacters(in: .whitespacesAndNewlines)
-    settings.keychainAccount = trimmedAccount
+    if !proposedToken.isEmpty {
+      settings.token = proposedToken
+    }
     await refresh()
   }
 
-  func testConnection(baseURLString: String, account: String, candidateToken: String) async throws {
+  func testConnection(baseURLString: String, candidateToken: String) async throws {
     let baseURL = try settings.validatedBaseURL(from: baseURLString)
-    let trimmedAccount = account.trimmingCharacters(in: .whitespacesAndNewlines)
-    guard !trimmedAccount.isEmpty else { throw MailboxConfigurationError.emptyAccount }
     let proposed = candidateToken.trimmingCharacters(in: .whitespacesAndNewlines)
-    let testToken = proposed.isEmpty ? try keychain.readToken(account: trimmedAccount) : proposed
-    guard let testToken, !testToken.isEmpty else { throw MailboxViewModelError.missingCredential }
+    let testToken = proposed.isEmpty ? settings.token : proposed
+    guard !testToken.isEmpty else { throw MailboxViewModelError.missingCredential }
     _ = try await api.listMessages(
       baseURL: baseURL, token: testToken, query: "", attachmentsOnly: false, limit: 1)
   }
 
-  func removeCredential() async throws {
-    try keychain.deleteToken(account: settings.keychainAccount)
-    token = nil
+  func removeCredential() async {
+    settings.token = ""
     await refresh()
   }
 
@@ -199,13 +185,10 @@ final class MailboxViewModel {
 
   private func credentials() throws -> (baseURL: URL, token: String) {
     let baseURL = try settings.validatedBaseURL()
-    if let token, !token.isEmpty { return (baseURL, token) }
-    guard let storedToken = try keychain.readToken(account: settings.keychainAccount),
-      !storedToken.isEmpty
-    else {
+    guard !settings.token.isEmpty else {
       throw MailboxViewModelError.missingCredential
     }
-    return (baseURL, storedToken)
+    return (baseURL, settings.token)
   }
 }
 

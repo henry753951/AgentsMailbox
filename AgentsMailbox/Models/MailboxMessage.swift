@@ -25,14 +25,6 @@ struct MailboxMessage: Identifiable, Hashable, Sendable {
   var receivedAt: Date?
   var snippet: String
   var hasAttachments: Bool
-
-  var senderInitials: String {
-    let components = sender.displayName
-      .split(whereSeparator: { $0.isWhitespace || $0 == "@" || $0 == "." })
-      .prefix(2)
-    let initials = components.compactMap(\.first).map(String.init).joined()
-    return initials.isEmpty ? "?" : initials.uppercased()
-  }
 }
 
 struct MailboxMessageDetail: Identifiable, Hashable, Sendable {

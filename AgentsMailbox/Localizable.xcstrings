@@ -10,8 +10,8 @@
     "Add an API token in Settings to connect this mailbox." : {
       "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "請在「設定」中加入 API Token 以連線至信箱。" } } }
     },
-    "Add the API URL and token in Settings. The token is stored in your Mac’s Keychain." : {
-      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "請在「設定」中加入 API URL 與 Token。Token 會保存在 Mac 的鑰匙圈中。" } } }
+    "Add the API URL and token in Settings." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "請在「設定」中加入 API URL 與 Token。" } } }
     },
     "API URL" : {
       "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "API URL" } } }
@@ -55,20 +55,14 @@
     "Done" : {
       "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "完成" } } }
     },
-    "Enter a Keychain account name." : {
-      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "請輸入鑰匙圈帳號名稱。" } } }
-    },
     "Enter a valid HTTP or HTTPS API URL." : {
       "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "請輸入有效的 HTTP 或 HTTPS API URL。" } } }
     },
     "Inbox" : {
       "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "收件匣" } } }
     },
-    "Keychain Account" : {
-      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "鑰匙圈帳號" } } }
-    },
-    "Keychain service" : {
-      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "鑰匙圈服務" } } }
+    "Leave blank to keep the saved token" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "留白以保留已儲存的 Token" } } }
     },
     "Leave blank to keep the credential already saved for this account." : {
       "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "留白即可保留此帳號目前儲存的憑證。" } } }
@@ -87,6 +81,15 @@
     },
     "Mailbox Connection" : {
       "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "信箱連線" } } }
+    },
+    "Mailbox API" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "信箱 API" } } }
+    },
+    "Mailboxes" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "信箱" } } }
+    },
+    "Credential Storage" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "憑證儲存" } } }
     },
     "Mailbox Error" : {
       "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "信箱錯誤" } } }
@@ -151,17 +154,17 @@
     "Test Connection" : {
       "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "測試連線" } } }
     },
-    "The API URL is saved in Preferences. Your token stays in the macOS Keychain." : {
-      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "API URL 會儲存在偏好設定中；Token 只會保存在 macOS 鑰匙圈。" } } }
-    },
     "The base address of the mailbox API." : {
       "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "信箱 API 的基礎網址。" } } }
     },
-    "The token was removed from Keychain." : {
-      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "Token 已從鑰匙圈移除。" } } }
+    "The saved token was removed." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "已移除儲存的 Token。" } } }
     },
-    "The token will be deleted from Keychain. The mailbox API URL will remain saved." : {
-      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "Token 將從鑰匙圈刪除，信箱 API URL 仍會保留。" } } }
+    "The saved token will be removed. The mailbox API URL will remain saved." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "將移除儲存的 Token，信箱 API URL 仍會保留。" } } }
+    },
+    "The token is stored in this Mac’s app preferences. Leave it blank to keep the saved token." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "Token 會儲存在這台 Mac 的 App 設定中；留白即可保留目前的 Token。" } } }
     },
     "Try a different search." : {
       "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "請嘗試其他搜尋內容。" } } }
@@ -171,9 +174,6 @@
     },
     "Unknown sender" : {
       "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "未知寄件者" } } }
-    },
-    "Used to find this mailbox credential in Keychain." : {
-      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "用來在鑰匙圈中尋找此信箱的憑證。" } } }
     }
   },
   "version" : "1.0"

@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 
 struct SettingsView: View {
@@ -11,14 +12,13 @@ struct SettingsView: View {
       AboutSettingsView()
         .tabItem { Label("About", systemImage: "info.circle") }
     }
-    .frame(width: 610, height: 500)
+    .frame(width: 560, height: 300)
   }
 }
 
 private struct ConnectionSettingsView: View {
   @Bindable var model: MailboxViewModel
   @State private var baseURLString = ""
-  @State private var account = ""
   @State private var candidateToken = ""
   @State private var statusMessage: String?
   @State private var statusIsError = false
@@ -26,88 +26,50 @@ private struct ConnectionSettingsView: View {
   @State private var confirmsRemoval = false
 
   var body: some View {
-    ZStack {
-      MailboxBackground()
-      ScrollView {
-        VStack(alignment: .leading, spacing: 22) {
-          VStack(alignment: .leading, spacing: 6) {
-            Text("Mailbox Connection")
-              .font(.title2.weight(.semibold))
-            Text("The API URL is saved in Preferences. Your token stays in the macOS Keychain.")
-              .foregroundStyle(.secondary)
-          }
+    Form {
+      Section("Connection") {
+        TextField("API URL", text: $baseURLString)
+        SecureField("Bearer Token", text: $candidateToken)
 
-          VStack(alignment: .leading, spacing: 16) {
-            SettingsField(title: "API URL", detail: "The base address of the mailbox API.") {
-              TextField("https://api.example.com", text: $baseURLString)
-                .textFieldStyle(.roundedBorder)
-            }
+        Text(
+          "The token is stored in this Mac’s app preferences. Leave it blank to keep the saved token."
+        )
+        .font(.caption)
+        .foregroundStyle(.secondary)
+      }
 
-            SettingsField(
-              title: "Keychain Account", detail: "Used to find this mailbox credential in Keychain."
-            ) {
-              TextField("codex-agent", text: $account)
-                .textFieldStyle(.roundedBorder)
-            }
-
-            SettingsField(
-              title: "Bearer Token",
-              detail: "Leave blank to keep the credential already saved for this account."
-            ) {
-              SecureField("API token", text: $candidateToken)
-                .textFieldStyle(.roundedBorder)
-            }
-
-            HStack(spacing: 8) {
-              Image(systemName: "key.fill")
-                .foregroundStyle(MailboxPalette.blue)
-              Text("Keychain service")
-                .foregroundStyle(.secondary)
-              Text(AppSettings.keychainService)
-                .font(.callout.monospaced())
-                .textSelection(.enabled)
-            }
-            .font(.callout)
-          }
-          .padding(20)
-          .mailboxGlassCard(radius: 20)
-
-          if let statusMessage {
-            Label(
-              statusMessage,
-              systemImage: statusIsError ? "exclamationmark.circle.fill" : "checkmark.circle.fill"
-            )
-            .foregroundStyle(statusIsError ? Color.red : Color.green)
-            .font(.callout)
-          }
-
-          HStack {
-            Button("Remove Token", role: .destructive) { confirmsRemoval = true }
-              .disabled(isWorking)
-            Spacer()
-            Button("Test Connection") { testConnection() }
-              .disabled(isWorking)
-              .mailboxGlassButton()
-            Button("Save") { save() }
-              .keyboardShortcut(.defaultAction)
-              .disabled(isWorking)
-              .mailboxGlassButton(prominent: true)
-          }
+      if let statusMessage {
+        Section {
+          Label(
+            statusMessage,
+            systemImage: statusIsError ? "exclamationmark.circle.fill" : "checkmark.circle.fill"
+          )
+          .foregroundStyle(statusIsError ? Color.red : Color.green)
         }
-        .frame(maxWidth: 540)
-        .padding(28)
-        .frame(maxWidth: .infinity)
+      }
+
+      Section {
+        HStack {
+          Button("Remove Token", role: .destructive) { confirmsRemoval = true }
+            .disabled(isWorking)
+          Spacer()
+          Button("Test Connection") { testConnection() }
+            .disabled(isWorking)
+          Button("Save") { save() }
+            .keyboardShortcut(.defaultAction)
+            .disabled(isWorking)
+        }
       }
     }
+    .formStyle(.grouped)
     .onAppear {
       baseURLString = model.settings.baseURLString
-      account = model.settings.keychainAccount
     }
     .alert("Remove API Token?", isPresented: $confirmsRemoval) {
       Button("Cancel", role: .cancel) {}
       Button("Remove", role: .destructive) { removeToken() }
     } message: {
-      Text("The token will be deleted from Keychain. The mailbox API URL will remain saved.")
+      Text("The saved token will be removed. The mailbox API URL will remain saved.")
     }
   }
 
@@ -118,7 +80,7 @@ private struct ConnectionSettingsView: View {
       defer { isWorking = false }
       do {
         try await model.testConnection(
-          baseURLString: baseURLString, account: account, candidateToken: candidateToken)
+          baseURLString: baseURLString, candidateToken: candidateToken)
         statusIsError = false
         statusMessage = String(localized: "Connection succeeded.")
       } catch {
@@ -135,7 +97,7 @@ private struct ConnectionSettingsView: View {
       defer { isWorking = false }
       do {
         try await model.saveConnection(
-          baseURLString: baseURLString, account: account, newToken: candidateToken)
+          baseURLString: baseURLString, newToken: candidateToken)
         candidateToken = ""
         statusIsError = false
         statusMessage = String(localized: "Connection settings saved.")
@@ -151,31 +113,10 @@ private struct ConnectionSettingsView: View {
     statusMessage = nil
     Task {
       defer { isWorking = false }
-      do {
-        try await model.removeCredential()
-        candidateToken = ""
-        statusIsError = false
-        statusMessage = String(localized: "The token was removed from Keychain.")
-      } catch {
-        statusIsError = true
-        statusMessage = error.localizedDescription
-      }
-    }
-  }
-}
-
-private struct SettingsField<Content: View>: View {
-  let title: LocalizedStringKey
-  let detail: LocalizedStringKey
-  @ViewBuilder let content: Content
-
-  var body: some View {
-    VStack(alignment: .leading, spacing: 7) {
-      Text(title).font(.headline)
-      Text(detail)
-        .font(.caption)
-        .foregroundStyle(.secondary)
-      content
+      await model.removeCredential()
+      candidateToken = ""
+      statusIsError = false
+      statusMessage = String(localized: "The saved token was removed.")
     }
   }
 }
@@ -184,36 +125,44 @@ private struct AboutSettingsView: View {
   @State private var isShowingLicenses = false
 
   var body: some View {
-    ZStack {
-      MailboxBackground()
-      VStack(spacing: 18) {
-        MailboxMark(size: 82)
-        VStack(spacing: 5) {
-          Text("Agents Mailbox")
-            .font(.title.weight(.semibold))
-          Text("A small, read-only macOS client for an Agents Mailbox inbox.")
-            .foregroundStyle(.secondary)
+    ScrollView {
+      VStack(alignment: .leading, spacing: 22) {
+        HStack(spacing: 16) {
+          Image(nsImage: NSApplication.shared.applicationIconImage)
+            .resizable()
+            .interpolation(.high)
+            .frame(width: 68, height: 68)
+          VStack(alignment: .leading, spacing: 4) {
+            Text("Agents Mailbox")
+              .font(.title2.weight(.semibold))
+            Text(versionDescription)
+              .foregroundStyle(.secondary)
+          }
         }
+
+        Text("A small, read-only macOS client for an Agents Mailbox inbox.")
+          .foregroundStyle(.secondary)
+
         Text(
           "Messages are treated as untrusted content. This app does not send, reply to, delete, or mark mail, and it does not load remote HTML resources."
         )
-        .multilineTextAlignment(.center)
         .foregroundStyle(.secondary)
-        .frame(maxWidth: 420)
+
         Button {
           isShowingLicenses = true
         } label: {
           Label("Open-Source Licenses", systemImage: "doc.text")
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(Rectangle())
         }
-        .mailboxGlassButton()
-        Text(versionDescription)
-          .font(.caption)
-          .foregroundStyle(.tertiary)
+        .buttonStyle(.plain)
+        .padding(14)
+        .background(.quaternary.opacity(0.5), in: RoundedRectangle(cornerRadius: 12))
       }
-      .padding(36)
-      .mailboxGlassCard(tint: MailboxPalette.blue.opacity(0.035), radius: 26)
+      .frame(maxWidth: 470, alignment: .leading)
+      .padding(28)
+      .frame(maxWidth: .infinity)
     }
-    .padding(28)
     .sheet(isPresented: $isShowingLicenses) {
       LicenseTextView()
     }

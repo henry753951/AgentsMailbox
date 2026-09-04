@@ -5,8 +5,8 @@ A small native macOS reader for the
 API. It offers server-side search, attachment filtering, message details, and
 raw EML export.
 
-The app is intentionally read-only. API credentials are stored in macOS
-Keychain and are never written to project files or UserDefaults.
+The app is intentionally read-only. The API token is stored in the app's local
+preferences on this Mac and is never written to project files.
 
 ## Requirements
 
@@ -21,12 +21,10 @@ make check
 ```
 
 Open `AgentsMailbox.xcodeproj` in Xcode to run the app. In Settings, enter the
-API URL and save the Bearer token to Keychain. The defaults match the Codex
+API URL and save the Bearer token locally. The default matches the Codex
 `agents-mailbox` skill:
 
 - API URL: `https://api.agents.hongyu.dev`
-- Keychain service: `agents.hongyu.dev-mailbox-api`
-- Keychain account: `codex-agent`
 
 ## Updates and releases
 
