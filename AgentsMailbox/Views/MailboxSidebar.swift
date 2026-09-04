@@ -7,7 +7,7 @@ struct MailboxSidebar: View {
     VStack(spacing: 0) {
       List {
         Section {
-          sidebarRow(scope: .inbox, title: "Inbox", symbol: "tray.full", count: model.total)
+          sidebarRow(scope: .inbox, title: "Inbox", symbol: "tray.full", count: model.inboxTotal)
           sidebarRow(scope: .attachments, title: "Attachments", symbol: "paperclip", count: nil)
         }
       }

@@ -15,7 +15,7 @@ final class MailboxViewModel {
   var isLoading = false
   var isLoadingDetail = false
   var isLoadingMore = false
-  var total: Int?
+  var inboxTotal: Int?
   var errorMessage: String?
   var settingsPresented = false
 
@@ -64,7 +64,9 @@ final class MailboxViewModel {
       guard generation == listGeneration else { return }
       messages = page.messages
       nextCursor = page.nextCursor
-      total = page.total
+      if scope == .inbox {
+        inboxTotal = page.total
+      }
       connectionState = .connected
       errorMessage = nil
 
@@ -116,7 +118,9 @@ final class MailboxViewModel {
           !messages.contains(where: { $0.id == next.id })
         })
       nextCursor = page.nextCursor
-      total = page.total ?? total
+      if scope == .inbox {
+        inboxTotal = page.total ?? inboxTotal
+      }
     } catch {
       errorMessage = error.localizedDescription
     }
