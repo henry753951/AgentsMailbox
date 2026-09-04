@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v7
+      - name: Format lint
+        run: xcrun swift-format lint --recursive AgentsMailbox
+      - name: Build
+        run: >-
+          xcodebuild -project AgentsMailbox.xcodeproj -scheme AgentsMailbox
+          -configuration Debug -derivedDataPath .build/DerivedData
+          CODE_SIGNING_ALLOWED=NO build

@@ -1,0 +1,180 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "A small, read-only macOS client for an Agents Mailbox inbox." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "一款簡潔、唯讀的 Agents Mailbox macOS 收件匣用戶端。" } } }
+    },
+    "About" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "關於" } } }
+    },
+    "Add an API token in Settings to connect this mailbox." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "請在「設定」中加入 API Token 以連線至信箱。" } } }
+    },
+    "Add the API URL and token in Settings. The token is stored in your Mac’s Keychain." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "請在「設定」中加入 API URL 與 Token。Token 會保存在 Mac 的鑰匙圈中。" } } }
+    },
+    "API URL" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "API URL" } } }
+    },
+    "API token" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "API Token" } } }
+    },
+    "Attachments" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "附件" } } }
+    },
+    "Bearer Token" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "Bearer Token" } } }
+    },
+    "Cancel" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "取消" } } }
+    },
+    "Check for Updates…" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "檢查更新⋯" } } }
+    },
+    "Checking connection" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "正在檢查連線" } } }
+    },
+    "Choose a message from the list to read it." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "請從列表選擇一封郵件。" } } }
+    },
+    "Connect your mailbox" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "連接信箱" } } }
+    },
+    "Connected" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "已連線" } } }
+    },
+    "Connection" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "連線" } } }
+    },
+    "Connection settings saved." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "連線設定已儲存。" } } }
+    },
+    "Connection succeeded." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "連線成功。" } } }
+    },
+    "Done" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "完成" } } }
+    },
+    "Enter a Keychain account name." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "請輸入鑰匙圈帳號名稱。" } } }
+    },
+    "Enter a valid HTTP or HTTPS API URL." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "請輸入有效的 HTTP 或 HTTPS API URL。" } } }
+    },
+    "Inbox" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "收件匣" } } }
+    },
+    "Keychain Account" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "鑰匙圈帳號" } } }
+    },
+    "Keychain service" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "鑰匙圈服務" } } }
+    },
+    "Leave blank to keep the credential already saved for this account." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "留白即可保留此帳號目前儲存的憑證。" } } }
+    },
+    "License information is unavailable." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "無法取得授權資訊。" } } }
+    },
+    "Load More" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "載入更多" } } }
+    },
+    "Loading message…" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "正在載入郵件⋯" } } }
+    },
+    "Loading messages…" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "正在載入郵件⋯" } } }
+    },
+    "Mailbox Connection" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "信箱連線" } } }
+    },
+    "Mailbox Error" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "信箱錯誤" } } }
+    },
+    "Messages are treated as untrusted content. This app does not send, reply to, delete, or mark mail, and it does not load remote HTML resources." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "郵件一律視為不受信任內容。本 App 不會寄送、回覆、刪除或標記郵件，也不會載入 HTML 郵件的遠端資源。" } } }
+    },
+    "New mail will appear here." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "新郵件會顯示在這裡。" } } }
+    },
+    "No messages" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "沒有郵件" } } }
+    },
+    "No readable content" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "沒有可閱讀的內容" } } }
+    },
+    "No results" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "沒有搜尋結果" } } }
+    },
+    "No subject" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "無主旨" } } }
+    },
+    "Open Settings" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "打開設定" } } }
+    },
+    "Open-Source Licenses" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "開放原始碼授權" } } }
+    },
+    "Refresh" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "重新整理" } } }
+    },
+    "Remove" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "移除" } } }
+    },
+    "Remove API Token?" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "移除 API Token？" } } }
+    },
+    "Remove Token" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "移除 Token" } } }
+    },
+    "Save" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "儲存" } } }
+    },
+    "Save EML" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "儲存 EML" } } }
+    },
+    "Save Original Message" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "儲存原始郵件" } } }
+    },
+    "Search mail" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "搜尋郵件" } } }
+    },
+    "Select a message" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "選擇郵件" } } }
+    },
+    "Settings" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "設定" } } }
+    },
+    "Setup required" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "需要設定" } } }
+    },
+    "Test Connection" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "測試連線" } } }
+    },
+    "The API URL is saved in Preferences. Your token stays in the macOS Keychain." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "API URL 會儲存在偏好設定中；Token 只會保存在 macOS 鑰匙圈。" } } }
+    },
+    "The base address of the mailbox API." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "信箱 API 的基礎網址。" } } }
+    },
+    "The token was removed from Keychain." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "Token 已從鑰匙圈移除。" } } }
+    },
+    "The token will be deleted from Keychain. The mailbox API URL will remain saved." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "Token 將從鑰匙圈刪除，信箱 API URL 仍會保留。" } } }
+    },
+    "Try a different search." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "請嘗試其他搜尋內容。" } } }
+    },
+    "Unavailable" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "無法使用" } } }
+    },
+    "Unknown sender" : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "未知寄件者" } } }
+    },
+    "Used to find this mailbox credential in Keychain." : {
+      "localizations" : { "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "用來在鑰匙圈中尋找此信箱的憑證。" } } }
+    }
+  },
+  "version" : "1.0"
+}
