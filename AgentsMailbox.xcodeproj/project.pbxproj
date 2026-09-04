@@ -14,8 +14,18 @@
 		AB0000000000000000000007 /* AgentsMailbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AgentsMailbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AB0000000000000000000083 /* Exceptions for "AgentsMailbox" folder in "AgentsMailbox" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = AB0000000000000000000020 /* AgentsMailbox */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		AB0000000000000000000011 /* AgentsMailbox */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AgentsMailbox; sourceTree = "<group>"; };
+		AB0000000000000000000011 /* AgentsMailbox */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB0000000000000000000083 /* Exceptions for "AgentsMailbox" folder in "AgentsMailbox" target */, ); explicitFileTypes = {}; explicitFolders = (); path = AgentsMailbox; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,13 +172,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Agents Mailbox";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
-				INFOPLIST_KEY_SUEnableAutomaticChecks = YES;
-				INFOPLIST_KEY_SUFeedURL = "https://github.com/henry753951/AgentsMailbox/releases/latest/download/appcast.xml";
-				INFOPLIST_KEY_SUPublicEDKey = "gUyvto6k/jsfH0PWxnTF5PInR+ULgdRBmRRLdGfQdkY=";
-				INFOPLIST_KEY_SUScheduledCheckInterval = 86400;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AgentsMailbox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -192,13 +197,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Agents Mailbox";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
-				INFOPLIST_KEY_SUEnableAutomaticChecks = YES;
-				INFOPLIST_KEY_SUFeedURL = "https://github.com/henry753951/AgentsMailbox/releases/latest/download/appcast.xml";
-				INFOPLIST_KEY_SUPublicEDKey = "gUyvto6k/jsfH0PWxnTF5PInR+ULgdRBmRRLdGfQdkY=";
-				INFOPLIST_KEY_SUScheduledCheckInterval = 86400;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AgentsMailbox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
